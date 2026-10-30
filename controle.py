@@ -44,15 +44,22 @@ def gerenciar_produtos():
                 salvar_produtos(produtos)
                 break    
     def adicionar_estoque():
+        nome_produto = input ("Digite o nome do produto para adicionar estoque: ")
+        quantidade = int (input ("Digite a quantidade a ser adicionada: "))
 
-        nome_produto = input ("Qual produto irá receber estoque? ")
-        estoque = int (input ("Qual o novo estoque? "))
-    
-        for produto in carregar_produtos():       
+        for produto in carregar_produtos():
             if produto["nome"] == nome_produto:
-                produto["estoque"] = estoque
+                produto["estoque"] + quantidade
                 salvar_produtos(produtos)
-
+                break
+            else:
+                print ("Produto não encontrado")
+                break
+    def mostrar_estoque_baixo():
+    
+        for produto in carregar_produtos():
+            if produto["estoque"] < 20:
+                print (produto)
     while True:
 
         print (" ---> Menu <--- ")
@@ -71,8 +78,8 @@ def gerenciar_produtos():
             remover_produto()
         elif opcao == "3":
             adicionar_estoque()
-        #elif opcao == "4":
-            #mostrar_estoque()
+        elif opcao == "4":
+            mostrar_estoque_baixo()
         elif opcao == "0":
             print ("saindo do sistema...")
             break
@@ -84,21 +91,15 @@ produtos = carregar_produtos()
 while True:
 
     print (" ---> Menu <--- ")
-    print ("1 - Carregar produtos")
-    print ("2 - Salvar produtos")
-    print ("3 - Mostrar produtos")
-    print ("4 - Gerenciar produto")
+    print ("1 - Mostrar produtos")
+    print ("2 - Gerenciar produto")
     print ("0 - Sair")
 
     opcao = input ("Escolha uma opção: ")
 
     if opcao == "1":
-        carregar_produtos()
-    elif opcao == "2":
-        salvar_produtos()
-    elif opcao == "3":
         print (produtos)
-    elif opcao == "4":
+    elif opcao == "2":
         gerenciar_produtos()
     elif opcao == "0":
         print ("saindo do sistema...")
